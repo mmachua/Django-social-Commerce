@@ -1,0 +1,141 @@
+
+{% extends "base.html" %}  
+
+    { {% block head %}
+    <title>{{ user.shop.shop_name }}</title>
+{% endblock head %}}
+ {% block body %} 
+<!--navbar with profile element tabs user authentication is necessary for security-->
+<nav class="navbar navbar-expand text-white shadow navbar " style="background-color:teal;">
+         
+          
+
+      <!-- Small button groups (default and split) -->
+<div class="btn-group">
+  <button class="btn text-white btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{ user.shop.shop_name }}
+  </button>
+  <div class="dropdown-menu">
+          <a class=" dropdown-item" href="#">Welcome to {{ user.shop.shop_name }} </a>
+         <!-- <a class="dropdown-item" href="{% url "home:Contact" %}">Contact Us</a>
+          <a class=" dropdown-item" href="{% url "Profile:about" %}">About Us</a>-->
+
+  </div>
+</div>   
+ 
+
+</nav>
+
+
+
+<br/>
+
+
+
+
+    <div class="row no-gutters">
+        <div class="col-12 col-sm-6 col-md-3">
+
+          <div class="container">
+            <div class=" mw-100 p-2 card  border-white " style="width: 22.5rem;">
+                <img class="border border-grey rounded-circle"  src="{% if user.shop.image %}
+                              {{ user.shop.image.url  }}{% else %}{% endif  %}
+                              " class="img-responsive" alt="no image" style="width:6.5rem; height:6rem; " alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title center"> <b>{{ user.shop.shop_name }}</b></h5>
+                  <p class="card-text font-italic " style="color:red;"><p>{{ user.shop.description }}</p></p>
+                  <p class="card-text">
+              <hr>
+                  
+                  <p><b>Email </b>  : {{ user.email }}</p>
+                  
+                  <p><b>City </b>: {{ user.shop.city }}</p>
+                  <p><b>website</b>: {{ user.shop.website }}</p>
+                  <p><b>Contacts</b>: {{ user.shop.phone }}</p>
+              
+              
+        
+                  
+                </div>
+              </div>
+            </div>
+
+
+            
+          </div>
+<!--end profile column -->
+        <div class="col-12 col-sm-6 col-md-9" style="color:rgb(21, 20, 13)">
+
+  
+
+
+<div class="container">
+
+
+      <span class="align-middle">       
+            <div id="main" class="product-list">
+            <h4>{% if category %}{{ category.name }}{% else %}{% endif %} </h4>    
+                {% for product in products %}
+                
+        <span class="separator">
+            <div class="row" style="width: 18rem; height:18rem; display:table-row-group;"  >
+                
+                <div class="card  border-grey border-top-0 mb-3 shadow-sm " >
+                    <a href="{{ product.get_absolute_re_path }}">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% endif  %}" style="width: 15rem; height:12.5rem;">
+                    </a>
+                    <hr/>
+                    <div class="container">
+                    <a href="{{ product.get_absolute_re_path }}">{{ product.name }}</a><br/>
+                    {{ product.price }}Ksh
+
+                    <!--<small><a href="{{ product.get_delete_re_path }}">delete product</a></small>-->
+                </div>
+                    
+                    <div class="container">
+                        <form action="{ % url "cart:cart_add" product.id %}" method="post">
+                            {{ cart_product_form }}
+                            {% csrf_token %}
+                           <!-- <input type="submit" class="btn btn-info  btn-sm" value="Add to cart">-->
+                        </form>
+                </div>
+                
+                </div>
+                </div>
+            </span> 
+          
+                {% endfor %}
+
+</div>
+
+</div>
+      </div>
+
+
+<br>
+
+
+</div>
+
+<br/>
+{% include "pagination.html" %} 
+
+
+
+
+<br>
+<hr/>
+<footer class="container">
+    <p class="float-right"><a href="#">Back to top</a></p>
+    <p>&copy; Favourite &middot; <a href="{% url 'home:privacy' %}">Privacy</a> Favourite <a href="{% url 'home:terms' %}">Terms</a></p>
+</footer> 
+
+
+{% endblock body %} 
+
+
+
+
+
+
+

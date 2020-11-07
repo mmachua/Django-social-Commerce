@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% load static %}
+
+{{%  block head %}
+<title>Favourite. home</title>
+{% endblock head  %}}
+
+{% block body %}
+
+<!--start nav bar-->
+<nav class="navbar  navbar-light text-white shadow-sm " style="background-color:teal;"> 
+       <div class="btn-group">
+                  <button type="button"  class="btn btn-sm text-white "  aria-haspopup="true" aria-expanded="false">
+                    <a class=" btn-sm text-white" href="{% url "shopp:product_list" %}">Home</a>
+                  </button>
+       
+                <!-- Example single small button -->
+                <div class="btn-group">
+                  <button type="button"  class="btn btn-sm text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categories
+                  </button>
+                  <div class="dropdown-menu">
+                        <ul  class="list-group shadow-sm ">
+                                <li class=" dropdown-item" {% if not category %} class="#"{% endif %}>
+                                    <a href="{% url "shopp:product_list" %}" class="dropdown-item">All</a>
+                                </li>
+                            {% for c in categories %}
+                            <li class="dropdown-item" {% if category.slug == c.slug %} class="#"{% endif %}>
+                                <a href="{{ c.get_absolute_re_path }}" class="dropdown-item">{{ c.name }}</a>
+                            </li>
+                            {% endfor %}
+                            </ul>
+                    
+                  </div>
+                </div>
+
+</nav> 
+<!--end navbar-->
+
+
+
+
+
+<div class="row  no-gutters">
+
+    <!--start section 1-->
+
+            <div class="col-3 col-md col-md-2">
+                 <div class="container">
+                    <h4></h4>
+                 </div>           
+            </div>
+
+    <!--end section 1-->
+
+
+
+    <!--section 2-->
+        <div class="col-12 col-sm-6 col-md-8 " style="color:rgb(177, 8, 8);">
+        <br/>
+
+
+            
+        <span class="align-middle">       
+            <div id="main" class="product-list">
+            
+            <h4>{% if category %}{{ category.name }}{% else %}{% endif %} </h4>  
+
+        {% for product in products %}
+                
+                
+        <span class="separator">
+            <div class="row flex" style="width: 18rem; height:18rem;  display:table-row-group;"  >
+                
+                <div class="card  border-grey flex border-top-0 mb-3 shadow-sm " >
+                    <a href="{{ product.get_absolute_re_path }}">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% endif  %}" style="width: 15rem; height:12.5rem;">
+                    </a>
+                    <hr/>
+                    <div class="container">
+                    <a href="{{ product.get_absolute_re_path }}"><h6>{{ product.name }}</h6></a>
+                    {{ product.price }}Ksh
+                    <div class="" style="color:grey;">
+                    <!--{ % for user in users %}-->
+                    <a style="text-black" >by {{ product.user.shop.shop_name }}</a>
+                    <!--{ % endfor %}-->
+                    </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </span>
+
+
+        {% empty %} 
+<div class="container-fluid">
+<h4>No Product Found having search query "{{ request.GET.q }}"</h4>
+</div>
+
+                {% endfor %}
+
+            </div>
+        
+             </div>
+     <!--start section 3-->      
+            <div class="col-12 col-sm-6 col-md-2">
+            
+                <div class=" " style="color:olive;"><h4></h4>         
+               <div class="card-header border-left-0 shadow-sm container "><h5><b> shops</b></h5></div>
+                
+                <div class=" ">
+          
+          
+          {% for user in users %}
+          <div class=" ">
+              
+                  {% if user.is_staff %}
+                  {% if user.is_shop %}
+
+                  <ul class="list-group-item  border-left-0 ">
+                      <li class="list-group  " style=" display:table-row-group;">
+                          <a href="{% url 'Profile:view_profile_with_pk' pk=user.pk %}">
+                            
+                              <img class="border border-grey rounded-circle" src="{% if user.shop.image %}
+                              {{ user.shop.image.url  }}{% else %}{% endif  %}
+                              " class="img-responsive" alt="no image" style="width:3.0rem; height:3.0rem;">
+                            
+                           <h6> {{ user.shop.shop_name }} </h6>
+                            
+                          </a>
+                  
+                   
+                      </li>
+                      
+                    </ul>
+                    {% else %}
+                   
+
+                   {% endif %} 
+                   {% endif %}
+           
+          </div>
+          
+          {% endfor %}
+
+         
+          <script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0]
+    });
+  </script>
+          
+                    
+
+         </div>
+         
+         </div>
+          
+<br/>
+</hr>
+ 
+        
+        </div>
+      </div>
+      </div>
+                  </div>
+                </div>
+        </div>
+      </div>
+      <br/>
+
+
+
+
+ {% include "pagination.html" %} 
+
+
+
+
+      <hr/>
+     
+     
+      <footer class="container">
+            <p class="float-right"><a href="#">Back to top</a></p>
+              
+            <p>favourite.com &copy; 2019 <a href="{% url 'home:privacy' %}">Privacy</a>  <a href="{% url 'Profile:about' %}">About</a>  Favourite <a href="{% url 'home:terms' %}">Terms</a> 
+             <a href="{% url 'home:Contact' %}">contact us</a></p> 
+          </footer>   
+    
+{% endblock body %}

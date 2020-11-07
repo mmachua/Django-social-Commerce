@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{{%  block head %}
+<title>Privacy</title>
+{% endblock head  %}}
+
+{% block body %}
+<nav class="navbar navbar-expand text-white shadow navbar " style="background-color:teal;">Privacy   
+</nav>
+<br/>
+
+ 
+ <div class='container'>
+                  
+
+       {% for privacy in privacy %}
+       
+          <div class=" card border-0   "  >
+              <div class="container ">
+                 
+                <a class=" " href=""> <b>{{ privacy.title }} </b> </a>
+                
+                
+              </div>  
+
+              <div class="card border-0 container ">
+                <p class=" text-white "><p>{{ privacy.text }}</p></p>
+                
+                
+              </div>
+              
+            </div>
+            <br>
+            {% endfor  %}
+            <br>
+
+</div>
+
+<br/>
+<hr>     
+<footer class="container">
+      <p class="float-right"><a href="#">Back to top</a></p>
+      <p>&copy; Favourite &middot; <a href="{% url 'home:privacy' %}">Privacy</a>  <a href="{% url 'home:terms' %}">Terms</a></p>
+</footer>   
+
+{% endblock body %}
+

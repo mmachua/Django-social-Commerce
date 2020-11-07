@@ -1,0 +1,159 @@
+ {% load static %}
+ <!DOCTYPE html>
+ <html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+
+    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/infinite.min.js' %}"></script>
+
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login/style.css'%}" type="text/css">
+    
+      {% block head %}
+      <title>base</title>
+    
+      {% endblock %}
+</head>
+<body>
+
+
+
+
+                <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+                        <a class="navbar-brand" style="color:rgb(16, 73, 68)" href="{% url 'shopp:product_list'  %}"><h6><b>Favourite</b></h6></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                {% if user.is_authenticated %}      
+                        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                                <li class="nav-item active mr-auto">
+                                   <a class="nav-link" href="{% url  'shopp:product_list' %}">Home</a>
+                                </li>
+                               <!-- <li class="nav-item active mr-auto">
+                                        <a class="nav-link mr-auto" href="{ % url  'home:home' %}">Home<span class="sr-only">(current)</span></a>
+                                    </li>-->
+                                  <li class="nav-item active mr-auto">
+                                        <a class="nav-link" href="{% url  'Profile:shop' %}">all shops</a>
+                                  </li>
+                              
+                               
+                          </ul>
+
+
+
+                                      <!-- Example single small button -->
+               <li class="nav item">
+                      <div class="dropdown">
+                              <a class="btn btn-sm btn-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        
+                                       account
+                                    
+                              </a>
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                
+                  
+                  <a class="dropdown-item" href="{% url 'login:profile' %}">
+                            View Profile                 
+                  </a>
+                 
+                                
+                                {% if user.is_shop %}
+                                    <a class="dropdown-item"  href="{% url  'Profile:Shopadmin' %}">shop admin</a>
+                                 
+                                
+                                    
+                                  {% else %}
+
+                                  {% endif %}
+                                 
+
+
+
+
+                  <a class="dropdown-item" href="{% url 'login:logout' %}">Logout</a>
+                 
+              </div>
+            </div>
+          </li>
+   
+              
+
+
+
+
+                                <form   class="form-inline my-2 my-lg-0" action='{% url 'shopp:product_list' %}'>
+                                
+                                   
+                                        <input  type="search" class="form-control outline-info btn-sm mr-sm-2"  placeholder="Search" name='q'>
+                                     {% csrf_token %}      
+                                        <button class="btn btn-outline-info btn-sm btn-rounded my-2 my-sm-0" type="submit">Search</button>
+                                      </form>
+                                {% else  %}
+                          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+                                   
+
+                                   <div class="btn-group">
+                                <button class="btn text-black btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                         account →
+                                </button>
+                                <div class="dropdown-menu">
+          
+                                    <a class="dropdown-item" href="{% url 'login'  %}">sign in</a>
+                                    <a class="dropdown-item" href="{% url 'signup'  %}">sign up</a>
+                                    <a class="dropdown-item" href="{% url 'login:reset_password'  %}">reset-password </a>
+                                    <a class="dropdown-item" href="{% url 'Profile:about' %}">about</a>
+
+                                </div>
+                                </div>
+
+                                   
+                          </ul>           
+                        
+                                    <form   class="form-inline my-2 my-lg-0" action='{% url 'shopp:product_list' %}'>
+                                
+                                       {% csrf_token %}  
+                                        <input  type="search" class="form-control btn-sm mr-sm-2"  placeholder="Search" name='q'>
+                                     {% csrf_token %}      
+                                        <button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                      </form>
+                        
+
+              
+           
+                              
+                             {% endif %}
+                        </div>
+                      </nav>  
+       
+    {% block body%}
+    <h1>Base</h1>
+    {% endblock %}
+
+
+
+
+
+    <!-- Optional JavaScript -->
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

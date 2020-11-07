@@ -1,0 +1,11 @@
+{% if posts.count > 0 %}
+
+{% for post in posts %}
+      <li><a href="/posts/get/{{ post.id }}/">{{ post.title }} </a></li>
+{% endfor %}
+
+{% else %}
+
+<li>None to show!</li>
+
+{% endif %}

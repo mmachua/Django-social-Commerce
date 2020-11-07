@@ -1,0 +1,59 @@
+{% extends "base.html" %} 
+
+{ {% block head %}
+    <title>About Favourite</title>
+{% endblock head %}}
+
+{% block body %}
+<nav class="navbar navbar-expand text-white shadow navbar " style="background-color:teal;">
+    
+        <b>about us</b>
+</nav>
+<br/>
+<div class = 'container'>
+    
+
+
+
+
+
+
+
+
+          {% for about in about %}
+          <div class="card border-grey  mb-3  border-0" style="max-width: 68.5rem ; " >
+              
+              <div class="card-body ">
+                  <div class="row">
+                        <div class="col-12 col-md-3">
+                                <br>
+                                <img src="{{ about.logo.url  }}" class="mw-100 rounded border-dark" style="width: 20.24rem; ">
+                        </div>
+                        <div class="col-12 col-md-9">
+                          
+                                <p class=" text-white card-title"><p>{{ about.text }}</p></p>
+                                
+                        </div>
+                        
+                        </div>
+               </div>
+            </div>
+
+              
+              
+            
+            {% endfor  %}
+
+</div>
+
+    <hr/>
+     
+     
+      <footer class="container">
+            <p class="float-right"><a href="#">Back to top</a></p>
+              
+            <p>favourite.com &copy; 2019 <a href="{% url 'home:privacy' %}">Privacy</a>  <a href="{% url 'Profile:about' %}">About</a>  Favourite <a href="{% url 'home:terms' %}">Terms</a> 
+             <a href="{% url 'home:Contact' %}">contact us</a></p> 
+          </footer>
+
+{% endblock body %}

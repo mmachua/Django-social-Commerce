@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{{%  block head %}
+<title> signup </title>
+{% endblock head  %}}
+
+{% block body %}
+<nav class="navbar navbar-expand text-white shadow navbar " style="background-color:teal;"><h6>Welcome, signup here </h6></nav>
+<br/>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-8 col-sm-10 col-12">
+      <h2>Sign up </h2>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Sign Up  →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+<br>
+<hr/>
+<footer class="container">
+    <p class="float-right"><a href="#">Back to top</a></p>
+    <p>&copy; Favourite &middot; <a href="{% url 'home:privacy' %}">Privacy</a> Favourite <a href="{% url 'home:terms' %}">Terms</a></p>
+</footer> 
+
+
+{% endblock body %}

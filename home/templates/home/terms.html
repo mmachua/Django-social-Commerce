@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{{%  block head %}
+<title>Terms and Conditions</title>
+{% endblock head  %}}
+
+{% block body %}
+<nav class="navbar navbar-expand text-white shadow navbar " style="background-color:teal;">Terms and Conditions  
+</nav>
+<br/>
+<div class='container'>
+{% for terms in terms %}
+
+          
+        <span class="separator">
+            <div class="row flex" style="width: 18rem; height:18rem; display:table-row-group;"  >
+                
+                <div class="card container  border-0  mb-3  " ><br>
+                <div class='container'>
+                   <a style="text-black" ><b> {{ terms.title }}</b></a>
+                   </div>
+                   <br/>
+                    <div class="container">
+                   
+                   
+                    <div class="" style="color:grey;">
+                    
+                    <a style="text-black" >by {{ terms.text }}</a>
+                  
+                    </div>
+                    </div>
+                    
+                   
+                
+                </div>
+            </div>
+        </span> 
+
+{% endfor %}
+</div>
+
+
+
+
+<br/>
+
+<hr> 
+
+<footer class="container">
+      <p class="float-right"><a href="#">Back to top</a></p>
+      <p>&copy; Favourite &middot; <a href="{% url 'home:privacy' %}">Privacy</a>  <a href="{% url 'home:terms' %}">Terms</a></p>
+</footer>   
+
+{% endblock body %}

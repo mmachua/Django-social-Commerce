@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{{%  block head %}
+<title>Home</title>
+{% endblock head  %}}
+
+{% block body %}
+<nav class="navbar navbar-expand text-white shadow navbar " style="background-color:teal;">Home   
+</nav>
+<br/>
+
+
+
+
+    <div class="row no-gutters">
+        <div class="col-12 col-sm-6 col-md-3">
+
+          <div class="container">
+            <div class=" mw-100 p-2 card  border-grey shadow " style="width: 21.5rem;">
+                <img class="card-img-top" src="{% if user.userprofile.image %}
+                              {{ user.userprofile.image.url  }}{% else %}{% endif  %}
+                              " class="img-responsive" alt="no image"  style="width:21.2.5rem; height:15rem; " alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title center"> <b>{{ user }}</b></h5>
+                  <p class="card-text font-italic "><p>{{ user.userprofile.description }}</p></p>
+                  
+                </div>
+              </div>
+            </div>
+
+
+            
+          </div>
+
+        <div class="col-12 col-sm-6 col-md-6" style="color:rgb(21, 20, 13)">
+
+
+
+        
+       <div class="container">          
+          <div class="card " >            
+            <div class="card-body text-primary">             
+            
+            </div>
+        </div>
+        
+
+
+          {% for post in posts %}
+          <div class="card border-grey  mb-3 shadow border-bottom-0" style="max-width: 44.5rem ; " >
+              <div class="card-header ">
+                 
+                <a class="mr-auto " href="{% url 'Profile:view_profile_with_pk' pk=post.user.pk %}"> <b>{{ post.user.username }} </b> </a>
+                
+              </div>
+              <div class="card-body ">
+                <p class=" text-white card-title"><p>{{ post.post }}</p></p>
+                <p class="card-text border-dark" > 
+                  <a href="{{ Post.get_absolute_re_path }}">
+                    <img src="{{ post.image.url  }}" class="mw-100 rounded border-dark" style="width: 41.24rem; ">
+                  </a>  
+                </p>
+              </div>
+              <div class="card-footer bg ">
+
+<form action="{% url 'home:like_post' %}" method="post">
+  {% csrf_token %}
+  {% if is_liked %}
+ <button type="submit" value="{{ post.id }}" class="btn btn-sm btn-outline-danger " name="post_id">Dislike</button>
+ {% else %}
+ <button type="submit" value="{{ post.id }}" class="btn btn-sm btn-outline-primary " name="post_id">like</button>
+ {% endif %}
+   <p> {{post.date}}</p>
+</form>            
+              </div>
+            </div>
+            {% endfor  %}
+
+
+          
+
+        </div>
+
+
+
+
+      </div>
+
+
+
+
+        <div class="col-12 col-sm-6 col-md-3" style="color:rgb(32, 94, 60)">
+         
+          
+          <div  class="container">
+
+
+
+
+            <div class=" mw-100 card shadow-sm" style="width: 18rem;">
+                <div class="card-header"><h5><b>Other Shops</b></h5></div>
+                <div class="card-body text-dark">
+          
+          
+          {% for user in users %}
+          <div class=" ">
+              
+
+
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item ">
+                          <a href="{% url 'Profile:view_profile_with_pk' pk=user.pk %}"><h6>
+                            
+                              <img class="border border-grey rounded-circle" src="{% if user.userprofile.image %}
+                              {{ user.userprofile.image.url  }}{% else %}{% endif  %}
+                              " class="img-responsive" alt="no image" style="width:3.5rem; height:3.5rem;">
+                            
+                            <b>{{ user.get_full_name }}</b>  </h6>
+                            
+                          </a>
+                    {% if not user in friends %}
+                    <a href="{% url 'home:change_friends' operation='add' pk=user.pk %}">
+                      <button type="submit" class="btn btn-sm btn-outline-primary " name="button">Add to favourite</button> 
+                    </a>  
+                    {% endif %} 
+                      </li>
+                      
+                    </ul>
+                    
+              
+           
+          </div>
+          
+          {% endfor %}
+         
+         </div>
+         </div>
+          
+<br/>
+
+
+         <div class=" mw-100 card shadow" style="width: 18rem;">
+            <div class="card-header">
+                <h5><b>Favourite shops </b></h5> 
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                  {% for friend in friends %}
+                  <div class="">
+                  
+                      <a href="{% url 'Profile:view_profile_with_pk' pk=friend.pk %}">
+                        <h6><br/><img class="border border-grey rounded-circle" src="{% if friend.userprofile.image %}{{ friend.userprofile.image.url  }}{% else %}{% endif  %}" alt="no image" style="width:3rem; height:3rem;">
+                         <b  >{{ friend.username }}</b> </h6>
+                      </a>
+                    
+                  </div>
+                  <a href="{% url 'home:change_friends' operation='remove' pk=friend.pk %}">
+                      <button type="submit" class="btn btn-sm btn-outline-primary " name="button">remove from Favourite</button> 
+                    </a>
+                  
+                  {% endfor %}
+              </li>
+              
+            </ul>
+          </div>
+
+          
+        
+        </div>
+      </div>
+
+    </div>
+
+
+<br>
+<hr/>
+<footer class="container">
+    <p class="float-right"><a href="#">Back to top</a></p>
+    <p>&copy; Martin Machua &middot; <a href="#">Privacy</a> Smartchat <a href="#">Terms</a></p>
+  </footer>
+</div>
+{% endblock body %} 

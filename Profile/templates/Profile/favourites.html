@@ -1,0 +1,53 @@
+{% extends "base.html" %}  
+
+    { {% block head %}
+    <title>favouriteshops</title>
+{% endblock head %}}
+ {% block body %}
+
+<nav class="navbar navbar-expand text-white shadow navbar " style="background-color:teal;">Your favourite shops
+</nav>
+
+
+  <br/>
+
+<div class = 'container'>
+{% for friend in friends %}
+ <span class="separator">
+            <div class="row flex" style="width: 10.5rem; height:9.5rem; display:table-row-group;"  >
+                
+                <div class="card  border-grey border-top-rounded mb-3 shadow-sm " >
+                    <a href="{% url 'Profile:view_profile_with_pk' pk=friend.pk %}">
+                      <div class='container'><br/>
+                        <img src="{% if friend.shop.image %}{{ friend.shop.image.url  }}{% else %}{% endif  %}" style="width: 10.5rem; height:9.5rem;">
+                      </div>
+                    </a>
+                   
+                    <div class="container">
+                    <a href="{{ product.get_absolute_re_path }}"><h6><b>{{ friend.shop.shop_name }}</b></h6></a>
+                    
+                    <div class="" style="color:grey;">
+                    
+                    <a href="{% url 'home:change_friends' operation='remove' pk=friend.pk %}">
+                      <button type="submit" class="btn btn-sm btn-outline-dark " name="button">remove from Favourite</button> 
+                    </a>
+                    </div>
+                    
+                    <br/>
+                    </div>
+                    
+                   
+                
+                </div>
+            </div>
+        </span>
+        {% empty %}
+
+          <h5>You have no favourite shops</h5>
+          {% endfor %}
+          
+</div>
+
+
+
+ {% endblock body %}

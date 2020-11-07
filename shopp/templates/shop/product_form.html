@@ -1,0 +1,72 @@
+{% extends "base.html" %}  
+{% load crispy_forms_tags %}
+{% load i18n %}
+{ {% block head %}
+    <title>Add Product</title>
+{% endblock head %}}
+
+{% block body %}
+<nav class="navbar navbar-expand text-white shadow navbar " style="background-color:teal;">Add Product</nav>
+<br/>
+
+
+<div class="row">
+        <div class="col-12 col-sm-6 col-md-6">
+            <div class="container">
+                <div class="card shadow-sm">
+                        <div class="card-body">                      
+            <div class="container">
+
+                    <div class="alert alert-primary" role="alert">
+                        <p> checkout! </p>
+                    </div>
+
+                {% if form %}
+                <form method="post" role="form" action="" class="">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                
+                <p><input type="submit" class="btn btn-sm btn-info" value="Place order"></p>
+                </form> 
+                {% endif %}
+            </div>             
+        </div>
+    </div>
+</div> 
+</div>
+        <!--section 2-->
+    <div class="col-3 col-md col-md-6" >
+    
+    
+    
+    
+        
+            <div class="container">
+                
+               <form method="POST">
+                         {% csrf_token %}
+                         {{ form|crispy }}
+                        <button type="submit" class="btn btn-success">Create Product</button>
+                    </form>
+         </div>
+        </div>     
+        
+    </div>
+
+
+
+
+
+
+
+</div>
+
+<br/>
+<hr/>     
+<footer class="container">
+      <p class="float-right"><a href="#">Back to top</a></p>
+      <p>&copy; Favourite.inc &middot; <a href="#">Privacy</a> Favourite <a href="#">Terms</a></p>
+    </footer>   
+
+
+{% endblock body %}

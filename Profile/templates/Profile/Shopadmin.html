@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{{%  block head %}
+<title>ShopAdmin</title>
+{% endblock head  %}}
+
+{% block body %}
+
+<nav class="navbar  navbar-light text-white shadow-sm " style="background-color:teal;"> 
+      <h6>shop admin</h6>
+</nav> 
+
+<div class="row">
+<!-- Fisrt section -->
+            <div class="col-12 col-sm-6 col-md-3">
+            <br/>
+                  <div class="container">
+            <div class=" card container shadow-sm  border " style="width: 22.5rem;"><br>
+                <img class="border border-grey rounded-circle"  src="{% if user.shop.image %}
+                              {{ user.shop.image.url  }}{% else %}{% endif  %}
+                              " class="img-responsive" alt="no image" style="width:5.5rem; height:5.5rem; " alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title center"> <b>{{ user.shop.shop_name }}</b></h5>
+                  
+                  <p class="card-text">
+              <hr>
+                  
+                  <p><b>Email </b>  : {{ user.email }}</p>
+                  
+                  <p><b>City </b>: {{ user.shop.city }}</p>
+                  
+                  
+              
+              
+        
+                  
+                </div>
+              </div>
+            </div> 
+            </div>
+
+<!-- second section -->
+            <div class="col-12 col-sm-6 col-md-6">
+            <br/>
+                 <div class="container">
+                 
+                    <a button type="button" class="btn btn-sm  btn-info btn-block"  href="{% url 'Profile:Profile'  %}">my shop</a></button>
+                    <a button type="button" class="btn btn-sm  btn-info  btn-block"  href="{% url 'Profile:product_form'  %}">add Product</a></button>
+                    <!--<a button type="button" class="btn btn-sm  btn-info  btn-block"  href="{% url 'Profile:Shopform'  %}">create shop</a></button>-->
+                    <a button type="button" class="btn btn-sm  btn-info btn-block"  href="{% url 'Profile:editshop'  %}"> shop</a></button>  
+                         
+                                
+                   
+                 </div>           
+            </div>
+
+
+<!-- Third section -->
+            <div class="col-12 col-sm-6 col-md-3">
+                 <div class="container">
+                 <br/>
+                     
+                 </div>           
+            </div>
+
+
+</div>
+
+
+
+{% endblock body %}

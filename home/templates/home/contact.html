@@ -1,0 +1,37 @@
+{% extends "base.html" %} 
+{% load crispy_forms_tags %} 
+{ {% block head %}
+<title>Contact</title>
+{% endblock head %}}
+{% block body %}
+<nav class="navbar navbar-light text-white" style="background-color:teal;"> 
+    <h6>Contact us</h6>
+</nav>
+<br/>
+<div class="container">
+    
+<div class="col-xs-12 col-md-8">
+
+<div class="col-sm-6-sm-offset-3">
+<form role="form" action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+</div>
+</div>
+<div class="col-xs-12 col-md-4"></div>
+</div>
+
+
+    <hr/>
+     
+     
+      <footer class="container">
+            <p class="float-right"><a href="#">Back to top</a></p>
+              
+            <p>favourite.com &copy; 2019 <a href="{% url 'home:privacy' %}">Privacy</a>  <a href="{% url 'Profile:about' %}">About</a>  Favourite <a href="{% url 'home:terms' %}">Terms</a> 
+             <a href="{% url 'home:Contact' %}">contact us</a></p> 
+          </footer>
+          
+{% endblock body %}

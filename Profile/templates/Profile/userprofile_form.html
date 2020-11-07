@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+    { {% block head %}
+    <title>create userprofile</title>
+{% endblock head %}}
+ {% block body %}
+ <nav class="navbar navbar-expand text-white shadow navbar " style="background-color:teal;"><b>create userprofile</b></nav>
+<br/>
+
+ 
+                <div class= 'container'>
+                    <form method="POST">
+                         {% csrf_token %}
+                         {{ form|crispy }}
+                        <button type="submit" class="btn btn-sm btn-success">create userprofile</button>
+                    </form>
+                </div>
+         
+      
+
+
+
+
+<br>
+<hr>
+<footer class="container">
+    <p class="float-right"><a href="#">Back to top</a></p>
+    <p>&copy; Martin Machua &middot; <a href="{% url 'home:privacy' %}">Privacy</a> Favourite <a href="#">Terms</a></p>
+  </footer> 
+
+
+ {% endblock body %}

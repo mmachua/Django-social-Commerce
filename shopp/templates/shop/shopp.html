@@ -1,0 +1,55 @@
+{% extends "base.html" %} 
+
+{ {% block head %}
+    <title>{{ user.username }}</title>
+{% endblock head %}}
+
+{% block body %}
+
+<div class="container">
+      
+
+          <div class=" mw-100 card shadow-sm" style="width: 18rem;">
+                <div class="card-header"><h5><b>Other People</b></h5></div>
+                <div class="card-body text-dark">
+          
+          
+          {% for user in users %}
+          <div class=" ">
+              
+
+
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item ">
+                          <a href="{ % url 'Profile:view_profile_with_pk' pk=user.pk %}"><h6>
+                            
+                              <img class="border border-grey rounded-circle" src="{% if user.userprofile.image %}
+                              {{ user.userprofile.image.url  }}{% else %}{% endif  %}
+                              " class="img-responsive" alt="no image" style="width:3.5rem; height:3.5rem;">
+                            
+                            <b>{{ user.get_full_name }}</b>  </h6>
+                            
+                          </a>
+                    {% if not user in friends %}
+                    <a href="{ % url 'home:change_friends' operation='add' pk=user.pk %}">
+                      <button type="submit" class="btn btn-sm btn-outline-primary " name="button">follow</button> 
+                    </a>  
+                    {% endif %} 
+                      </li>
+                      
+                    </ul>
+                    
+              
+           
+          </div>
+          
+          {% endfor %}
+         
+         </div>
+         
+
+
+</div>
+
+
+{% endblock body %}

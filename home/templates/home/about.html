@@ -1,0 +1,20 @@
+{% extends "base.html" %}  
+{ {% block head %}
+<title>About</title>
+{% endblock head %}}
+{% block body %}
+<nav class="navbar navbar-light text-white" style="background-color:#149ab1;"> 
+    <h4>about {{ user }}</h4>
+</nav>
+
+<div class="jumbotron">
+        <h1 class="display-4"></h1>
+        <p class="lead">Njo electronics  is an electronics store located in nakuru .we sell a wide variety of electronics products
+             ranging from phones ..tablets.. tvs laptops and many more ..</p>
+        <p class="lead">we also have a 24 hr customer srvice. our shop is opened daily from 6a.m to 10 p.m from monday to friday
+        </p>
+        
+      </div>
+    <!--<p><p> {{ user.userprofile.description }}</p></p>-->
+</div>
+{% endblock body %}

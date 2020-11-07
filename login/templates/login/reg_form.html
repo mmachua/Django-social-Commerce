@@ -1,0 +1,67 @@
+{% extends "base.html" %} 
+{% load crispy_forms_tags %} 
+
+{{%  block head %}
+<title>Signup</title>
+{% endblock head  %}}
+    
+        {% block body %}
+        <nav class="navbar navbar-expand text-white shadow navbar " style="background-color:teal;"><h5>Welcome Create an account here!</h5></nav>
+    <div class="Loginbox">
+            <div class="container-fluid">
+
+</div>
+    
+
+    <div class="row">
+        <div class="col-3 col-md col-md-3">
+            <div class="container">
+                <h4>   Already have an account ?? then</h4> 
+              <a href="{% url 'login:login'  %}" class="btn btn-sm btn-primary"><button type="button" class="btn btn-primary btn-sm">Sign In</button></a>
+            </div>
+                
+            </div>
+    
+                <!--section 2-->
+            <div class="col-12 col-sm-6 col-md-6" style="color:rgb(9, 109, 92);">
+                    
+                <b>
+                <div class="container"> 
+                    <form method="POST">
+                         {% csrf_token %}
+                         {{ form|crispy }}
+                        <button type="submit" class="btn btn-success">Sign up</button>
+                    </form>
+                </div></b>
+                </div>
+                
+    
+    
+                </div>
+            
+                    
+                </div>
+               
+    
+                <div class="col-3 col-md col-md-3">
+                    <div class="container" style="color:olive;"><h4></h4>
+    
+    
+                        
+        
+                        
+              
+                  
+                      </div>
+                    </div>
+            
+          
+
+    
+    <br/>
+      <footer class="container">
+            <p class="float-right"><a href="#">Back to top</a></p>
+            <p>&copy; Martin Machua &middot; <a href="#">Privacy</a> Favourite <a href="#">Terms</a></p>
+          </footer>
+        {% endblock body %}
+    
